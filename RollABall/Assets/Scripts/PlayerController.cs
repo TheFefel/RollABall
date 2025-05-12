@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     public float speedX = 10f;
     public float speedY = 1f;
     public float decelerationY = 3f;
-    public float accelerationY = 1f;
-    public float slowAccelerationY = 0.1f;
+    public float accelerationY = 0.1f;
+    public float slowAccelerationY = -0.1f;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,13 +34,14 @@ public class PlayerController : MonoBehaviour
         
         float effectiveAcceleration = isBreaking ? slowAccelerationY : accelerationY;
         speedY += effectiveAcceleration * Time.fixedDeltaTime;
+        speedX += effectiveAcceleration * Time.fixedDeltaTime;
 
         if (speedY > maxSpeedReached)
         {
             maxSpeedReached = speedY;
         }
         
-        minSpeed = maxSpeedReached / 2f;
+        minSpeed = maxSpeedReached * 0.75f;
         speedY = Mathf.Max(speedY, minSpeed);
         
         //continious breaking
