@@ -5,8 +5,6 @@ public class PathGenerator : MonoBehaviour
     public GameObject[] pathPrefabs;
     public Transform startPosition;
     public int initialCount = 2;
-    public Transform player;
-    public float secondsPuffer = 1.5f;
 
     private Transform lastEnd;
     private float currentSpeed;
@@ -19,27 +17,6 @@ public class PathGenerator : MonoBehaviour
         {
             SpawnPath();
         }
-    }
-
-    void Update()
-    {
-
-        currentSpeed = player.GetComponent<Rigidbody>().linearVelocity.z;
-        
-        float distanceToEnd = lastEnd.position.z - player.position.z;
-
-        if (currentSpeed > 0)
-        {
-            
-            float timeTillEnd = distanceToEnd / currentSpeed;
-
-            if (timeTillEnd < secondsPuffer)
-            {
-                SpawnPath();
-            }
-            
-        }
-
     }
 
     public void SpawnPath()
@@ -56,4 +33,5 @@ public class PathGenerator : MonoBehaviour
             lastEnd = newEndPoint;
         }
     }
+    
 }
